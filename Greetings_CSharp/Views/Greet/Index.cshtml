@@ -1,0 +1,68 @@
+﻿@model Greetings 
+
+@{
+    ViewData["Title"] = "Greetings";
+}
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="text-center">
+            <div class="errors">
+                <p><b>@TempData["errorMessage"]</b></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <form asp-action="GreetMe" method="post">
+            <input type="text" asp-for="Name" placeholder="Enter your name">
+            <span class="countGretings">@TempData["count"]</span>
+
+            <div class="row">
+                <div class="col-4">
+                    Spanish
+                    <input type="radio" name="language" value="spanish" />
+                </div>
+                <div class="col-4">
+                    IsiZulu
+                    <input type="radio" name="language" value="isizulu" >
+                </div>
+                <div class="col-4">
+                    English
+                    <input type="radio" name="language" value="english" />
+                </div>
+            </div>
+
+            <button name="greetButton" class="btn btn-info w-50" type="submit" >Greet</button>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="output">
+            <span> <b>   @TempData["message"] </b></span>
+        </div>
+    </div>
+</div> <br>
+
+<div class="row">
+    <div class="col-6">
+        <form action="" method="post">
+        <p>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Greet" asp-action="Greeted">View Greeted name(s)</a>
+        </p>
+        </form>
+    </div>
+
+    <div class="col-6">
+        <form action="" method="post">
+        <p>
+            <a asp-controller="Greet" asp-action="Reset" class="btn btn-danger w-50" >Reset</a>
+        </p>
+        </form>
+    </div>
+</div>

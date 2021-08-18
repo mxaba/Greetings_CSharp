@@ -1,0 +1,38 @@
+@model IEnumerable<Greetings>
+
+@{
+    ViewData["Title"] = "Greeted names";
+}
+
+<div class="row">
+    <div class="col-12">
+        @if(Model.Count() > 0) {
+            <table class="cen">
+                <tr>
+                    <th>Name(s)</th>
+                    <th>Isizulu</th>
+                    <th>English</th>
+                    <th>Spanish</th>
+                    <th>Count</th>
+                    <th>Delete</th>
+                </tr>
+                @foreach(var obj in Model) {
+                    <tr>
+                        <td>@obj.Name</td>
+                        <td>@obj.Isizulu</td>
+                        <td>@obj.English</td>
+                        <td>@obj.Spanish</td>
+                        <td>@obj.Counts</td>
+                        <td class="txt-center">
+                            <a asp-controller="Greet" asp-route-Id="@obj.Id" asp-action="Delete" class="btn btn-danger" >Delete</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        }else {
+            <div class="output">
+                <span> <b> No names Greeted😅 </b></span>
+            </div>
+        }
+    </div>
+</div>
