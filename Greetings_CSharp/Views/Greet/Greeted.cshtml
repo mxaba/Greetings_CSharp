@@ -18,7 +18,9 @@
                 </tr>
                 @foreach(var obj in Model) {
                     <tr>
-                        <td>@obj.Name</td>
+                        <td>
+                            <a asp-controller="Greet" asp-route-Id="@obj.Id" asp-action="GreetedName" class="" >@obj.Name</a>
+                        </td>
                         <td>@obj.Isizulu</td>
                         <td>@obj.English</td>
                         <td>@obj.Spanish</td>

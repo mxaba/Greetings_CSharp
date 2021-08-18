@@ -21,10 +21,7 @@ namespace Greetings_CSharp.Controllers
 
         public void ResetDB(){
             IEnumerable<Greetings> objectList = _db.Greetings;
-            foreach (var obj in objectList)
-            {
-                _db.Greetings.Remove(obj);
-            }
+            _db.Greetings.RemoveRange(objectList);
             _db.SaveChanges();
         }
 

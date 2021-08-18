@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using Greetings_CSharp.Database;
 using Greetings_CSharp.Models;
 
@@ -19,11 +20,13 @@ namespace Greetings_CSharp.Controllers
         }
 
         public string ErrorMessage(Greetings objList, string language){
-
+            var regexTrue = Regex.IsMatch(objList.Name, @"^[a-zA-Z]+$");
             if (string.IsNullOrEmpty(objList.Name) && string.IsNullOrEmpty(language)) {
                 _errorMessage = "Please enter a name and select a language ❌";
             } else if (string.IsNullOrEmpty(language)){
                 _errorMessage = "Please select a language! ❌";
+            } else if (!regexTrue){
+                _errorMessage = "Please enter a valid name with only Letters! ❌";
             }
             else if (string.IsNullOrEmpty(objList.Name)){
                 _errorMessage = "Please enter a name! ❌";

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Greetings_CSharp.Database;
 using Greetings_CSharp.Models;
@@ -60,7 +61,8 @@ namespace Greetings_CSharp.Controllers
         {
             var message = new GreetMessage();
             var crud = new CRUD(_db);
-            if(!String.IsNullOrEmpty(objList.Name) && !String.IsNullOrEmpty(language)){
+            var regexTrue = Regex.IsMatch(objList.Name, @"^[a-zA-Z]+$");
+            if(!String.IsNullOrEmpty(objList.Name) && !String.IsNullOrEmpty(language) && regexTrue){
                 crud.CreteAndUpdate(objList, language);
                 TempData["message"] = message.Message(objList, language);
             } else{
