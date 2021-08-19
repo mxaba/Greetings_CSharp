@@ -40,6 +40,21 @@ namespace Greetings_CSharp.Controllers
             return RedirectToAction("Greeted");
         }
 
+        public IActionResult GreetedName(int? id)
+        {
+            var obj = _db.Greetings.Find(id);
+            if (id == null || id == 0 || obj == null)
+            {
+                return RedirectToAction("Index", "NotFound");
+            }
+            TempData["name"] = obj.Name;
+            TempData["isizulu"] = obj.Isizulu;
+            TempData["english"] = obj.English;
+            TempData["Spanish"] = obj.Spanish;
+            TempData["count"] = obj.Counts;
+            return View(obj);
+        }
+
         public IActionResult Reset()
         {
             var crud = new CRUD(_db);
