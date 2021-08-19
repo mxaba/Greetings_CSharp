@@ -1,8 +1,7 @@
 using System.Text.RegularExpressions;
 using Greetings_CSharp.Database;
-using Greetings_CSharp.Models;
 
-namespace Greetings_CSharp.Controllers
+namespace Greetings_CSharp.Models
 {
     public class GreetMessage {
 

@@ -22,20 +22,20 @@ namespace Greetings_CSharp.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            IEnumerable<Greetings> objectList = _db.Greetings;
-            TempData["count"] = objectList.Count();
+            IEnumerable<Greetings> grettingsDatabase = _db.Greetings;
+            TempData["count"] = grettingsDatabase.Count();
             return View();
         }
 
         public IActionResult Greeted()
         {
-            IEnumerable<Greetings> objectList = _db.Greetings;
-            return View(objectList);
+            IEnumerable<Greetings> grettingsDatabase = _db.Greetings;
+            return View(grettingsDatabase);
         }
 
         public IActionResult Delete(int? id)
         {
-            var crud = new CRUD(_db);
+            var crud = new CreateReadUpdateDelete(_db);
             crud.DeleteName(id);
             return RedirectToAction("Greeted");
         }
@@ -57,9 +57,9 @@ namespace Greetings_CSharp.Controllers
 
         public IActionResult Reset()
         {
-            var crud = new CRUD(_db);
-            IEnumerable<Greetings> objectList = _db.Greetings;
-            if(objectList.Count() > 0){
+            var crud = new CreateReadUpdateDelete(_db);
+            IEnumerable<Greetings> grettingsDatabase = _db.Greetings;
+            if(grettingsDatabase.Count() > 0){
                 crud.ResetDB();
                 TempData["errorMessage"] = "Names deleted 🤯";
             }else {
@@ -72,16 +72,16 @@ namespace Greetings_CSharp.Controllers
         // POST: /<controller>/
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult GreetMe(Greetings objList, string language)
+        public IActionResult GreetMe(Greetings bindedData, string language)
         {
             var message = new GreetMessage();
-            var crud = new CRUD(_db);
-            var regexTrue = Regex.IsMatch(objList.Name, @"^[a-zA-Z]+$");
-            if(!String.IsNullOrEmpty(objList.Name) && !String.IsNullOrEmpty(language) && regexTrue){
-                crud.CreteAndUpdate(objList, language);
-                TempData["message"] = message.Message(objList, language);
+            var crud = new CreateReadUpdateDelete(_db);
+            var regexTrue = Regex.IsMatch(bindedData.Name, @"^[a-zA-Z]+$");
+            if(!String.IsNullOrEmpty(bindedData.Name) && !String.IsNullOrEmpty(language) && regexTrue){
+                crud.CreteAndUpdate(bindedData, language);
+                TempData["message"] = message.Message(bindedData, language);
             } else{
-                TempData["errorMessage"] = message.ErrorMessage(objList, language);
+                TempData["errorMessage"] = message.ErrorMessage(bindedData, language);
             }
             return RedirectToAction("Index");
         }
