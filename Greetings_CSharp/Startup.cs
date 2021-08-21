@@ -29,6 +29,9 @@ namespace Greetings_CSharp
             options.UseSqlServer(
                 Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllersWithViews();
+
+            // Add application services.
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
