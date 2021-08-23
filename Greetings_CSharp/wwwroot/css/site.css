@@ -128,11 +128,13 @@ td form {
  
   .four_zero_four_bg h3{
        font-size:80px;
-       }
-       
-       .link_404{
+  }
+  
+  .link_404{
     padding: 10px 20px;
     background: rgb(78, 76, 78);
     margin: 20px 0;
-    display: inline-block;}
+    display: inline-block;
+  }
+  
   .contant_box_404{ margin-top:-50px;}

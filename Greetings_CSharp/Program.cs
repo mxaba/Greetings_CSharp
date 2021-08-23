@@ -22,6 +22,8 @@ namespace Greetings_CSharp
                 {
                     // webBuilder.UseUrls("http://*:" + Environment.GetEnvironmentVariable("PORT"));
                     webBuilder.UseStartup<Startup>();
+                    var port = Environment.GetEnvironmentVariable("PORT");
+                    webBuilder.UseUrls($"http://+:{port}");
                 });
     }
 }
