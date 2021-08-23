@@ -26,4 +26,9 @@
     <Folder Include="Views\Greet\" />
     <Folder Include="Database\" />
   </ItemGroup>
+
+  <Target Name="PrePublishTarget" AfterTargets="Publish">
+    <Exec Command="dotnet ef database update" />
+  </Target>
+
 </Project>
