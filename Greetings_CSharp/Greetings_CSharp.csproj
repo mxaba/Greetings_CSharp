@@ -22,13 +22,15 @@
     <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
     <None Remove="Microsoft.EntityFrameworkCore.Tools" />
   </ItemGroup>
+
+  <Target Name="PrePublishTarget" AfterTargets="Publish">
+    <Exec Command="dotnet ef migrations add Greetings" />
+    <Exec Command="dotnet ef database update" />
+  </Target>
+
   <ItemGroup>
     <Folder Include="Views\Greet\" />
     <Folder Include="Database\" />
   </ItemGroup>
-
-  <Target Name="PrePublishTarget" AfterTargets="Publish">
-    <Exec Command="dotnet ef database update" />
-  </Target>
 
 </Project>
