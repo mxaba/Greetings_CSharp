@@ -20,7 +20,7 @@ namespace Greetings_CSharp
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseUrls("http://*:" + Environment.GetEnvironmentVariable("PORT"));
+                    // webBuilder.UseUrls("http://*:" + Environment.GetEnvironmentVariable("PORT"));
                     webBuilder.UseStartup<Startup>();
                 });
     }
