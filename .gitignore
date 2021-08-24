@@ -11,6 +11,8 @@ autom4te.cache/
 tarballs/
 test-results/
 
+Greetings_CSharp/*.json
+
 # Mac bundle stuff
 *.dmg
 *.app
