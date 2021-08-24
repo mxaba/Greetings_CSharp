@@ -134,3 +134,6 @@ The application in Action [Greeting MVC CSharp](https://grettingappcsharp.heroku
             - Replace your connection string with that URL but make sure that you separate the `Host`, `User Id`, `Database`, `Password`
         - Run your Migration comands
     - You are goo to deploy
+
+## Deploying to heroku using Dockerfile
+- `Still yet to come...`
