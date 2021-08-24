@@ -29,10 +29,10 @@
     <None Remove="Npgsql.EntityFrameworkCore.PostgreSQL" />
   </ItemGroup>
 
-  <Target Name="PrePublishTarget" AfterTargets="Publish">
+  <!-- <Target Name="PrePublishTarget" AfterTargets="Publish">
     <Exec Command="dotnet ef migrations add Greetings" />
     <Exec Command="dotnet ef database update" />
-  </Target>
+  </Target> -->
 
   <ItemGroup>
     <Folder Include="Views\Greet\" />
