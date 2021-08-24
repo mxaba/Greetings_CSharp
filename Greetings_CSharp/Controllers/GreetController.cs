@@ -19,6 +19,12 @@ namespace Greetings_CSharp.Controllers
             _db = db;
         }
 
+        private CreateReadUpdateDelete crud;
+
+        private void CrudConstructor(){
+            crud = new CreateReadUpdateDelete(_db);
+        }
+
         // GET: /<controller>/
         public IActionResult Index()
         {
@@ -35,7 +41,7 @@ namespace Greetings_CSharp.Controllers
 
         public IActionResult Delete(int? id)
         {
-            var crud = new CreateReadUpdateDelete(_db);
+            CrudConstructor();
             crud.DeleteName(id);
             return RedirectToAction("Greeted");
         }
@@ -47,17 +53,17 @@ namespace Greetings_CSharp.Controllers
             {
                 return RedirectToAction("Index", "NotFound");
             }
-            TempData["name"] = obj.Name;
-            TempData["isizulu"] = obj.Isizulu;
-            TempData["english"] = obj.English;
-            TempData["Spanish"] = obj.Spanish;
-            TempData["count"] = obj.Counts;
-            return View(obj);
+            ViewBag.name = obj.Name;
+            ViewBag.isizulu = obj.Isizulu;
+            ViewBag.english = obj.English;
+            ViewBag.spanish = obj.Spanish;
+            ViewBag.count = obj.Counts;
+            return View();
         }
 
         public IActionResult Reset()
         {
-            var crud = new CreateReadUpdateDelete(_db);
+            CrudConstructor();
             IEnumerable<Greetings> grettingsDatabase = _db.Greetings;
             if(grettingsDatabase.Count() > 0){
                 crud.ResetDB();
@@ -75,7 +81,7 @@ namespace Greetings_CSharp.Controllers
         public IActionResult GreetMe(Greetings bindedData, string language)
         {
             var message = new GreetMessage();
-            var crud = new CreateReadUpdateDelete(_db);
+            CrudConstructor();
             var regexTrue = Regex.IsMatch(bindedData.Name, @"^[a-zA-Z]+$");
             if(!String.IsNullOrEmpty(bindedData.Name) && !String.IsNullOrEmpty(language) && regexTrue){
                 crud.CreteAndUpdate(bindedData, language);
