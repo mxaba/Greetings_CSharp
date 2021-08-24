@@ -31,7 +31,7 @@
 
   <Target Name="PrePublishTarget" AfterTargets="Publish">
     <!-- <Exec Command="dotnet ef migrations add greetings" /> -->
-    <Exec Command="dotnet ef database update" />
+    <!-- <Exec Command="dotnet ef database update" /> -->
   </Target>
 
   <ItemGroup>
