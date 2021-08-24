@@ -1,14 +1,12 @@
-@model Greetings
-
 @{
     ViewData["Title"] = "Greeted names";
 }
 
 <div class="row">
     <div class="col-12">
-        <h3> Hello, <b>@TempData["name"]</b> has been greeted <b>@TempData["count"]</b> time(s) in different languages</h3>
-        <label for="">IsiZulu: </label> <p> Sawubona, <b>@TempData["name"]</b> uvuselwe kayi @TempData["isizulu"]</p>
-        <label for="">English: </label> <p> Hello, <b>@TempData["name"]</b> has been greeted @TempData["english"] times </p>
-        <label for="">Spanish: </label> <p> Hola, <b>@TempData["name"]</b> ha sido saludado @TempData["spanish"] veces </p>
+        <h3> Hello, <b>@ViewBag.name</b> has been greeted <b>@ViewBag.count</b> time(s) in different languages</h3>
+        <label for="">IsiZulu: </label> <p> Sawubona, <b>@ViewBag.name</b> uvuselwe kayi @ViewBag.isizulu</p>
+        <label for="">English: </label> <p> Hello, <b>@ViewBag.name</b> has been greeted @ViewBag.english times </p>
+        <label for="">Spanish: </label> <p> Hola, <b>@ViewBag.name</b> ha sido saludado @ViewBag.spanish veces </p>
     </div>
 </div>
