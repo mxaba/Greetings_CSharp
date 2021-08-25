@@ -92,5 +92,9 @@ namespace Greetings_CSharp.Models
             _db.SaveChanges();
             return bindedData;
         }
+
+        public string CapitalizeFirstLetterAndLowerRest(string name){
+            return char.ToUpper(name[0]) + name.Substring(1).ToLower();
+        }
     }
 }

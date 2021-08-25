@@ -83,6 +83,7 @@ namespace Greetings_CSharp.Controllers
             var message = new GreetMessage();
             CrudConstructor();
             var regexTrue = Regex.IsMatch(bindedData.Name, @"^[a-zA-Z]+$");
+            bindedData.Name = crud.CapitalizeFirstLetterAndLowerRest(bindedData.Name);
             if(!String.IsNullOrEmpty(bindedData.Name) && !String.IsNullOrEmpty(language) && regexTrue){
                 crud.CreteAndUpdate(bindedData, language);
                 TempData["message"] = message.Message(bindedData, language);
