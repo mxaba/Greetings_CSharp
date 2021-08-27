@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Greetings_CSharp.Database;
+using Greetings_CSharp.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,6 +26,9 @@ namespace Greetings_CSharp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<ICreateReadUpdateDelete, CreateReadUpdateDelete>();
+            services.AddTransient(typeof(ICreateReadUpdateDelete), typeof(CreateReadUpdateDelete));
+            
             services.AddControllersWithViews();
 
             var IsDevelopment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
