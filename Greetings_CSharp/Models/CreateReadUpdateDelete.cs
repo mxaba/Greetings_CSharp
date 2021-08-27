@@ -27,8 +27,24 @@ namespace Greetings_CSharp.Models
             _db.SaveChanges();
         }
 
-        public void CreteAndUpdate(Greetings bindedData, string language)
+        public IEnumerable<Greetings> GreetedNames(){
+            IEnumerable<Greetings> grettingsDatabase = _db.Greetings;
+            return grettingsDatabase;
+        }
+
+        public Greetings FindUserById(int? id){
+            Greetings greetingsDatabase = _db.Greetings.Find(id);
+            return greetingsDatabase;
+        }
+
+        public int CountData(){
+            IEnumerable<Greetings> greetingsDatabase = _db.Greetings;
+            return greetingsDatabase.Count();
+        }
+
+        public string CreateAndUpdate(Greetings bindedData, string language)
         {
+            var message = new GreetMessage();
             var name = bindedData.Name;
             var _id = 0;
             IEnumerable<Greetings> greetingsDatabase = _db.Greetings;
@@ -46,6 +62,8 @@ namespace Greetings_CSharp.Models
 
             }
             else Create(bindedData, language);
+
+            return message.Message(bindedData, language);
         }
 
         private void Create(Greetings bindedData, string language)
