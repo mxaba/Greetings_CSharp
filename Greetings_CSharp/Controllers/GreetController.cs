@@ -13,42 +13,36 @@ namespace Greetings_CSharp.Controllers
 {
     public class GreetController : Controller
     {
-        private readonly ApplicationDbContext _db;
-
-        public GreetController(ApplicationDbContext db){
-            _db = db;
-        }
-
-        private CreateReadUpdateDelete crud;
-
-        private void CrudConstructor(){
-            crud = new CreateReadUpdateDelete(_db);
+        private ICreateReadUpdateDelete crud;
+        
+        public GreetController([FromServices] ICreateReadUpdateDelete createReadUpdateDelete){
+            crud = createReadUpdateDelete; 
         }
 
         // GET: /<controller>/
         public IActionResult Index()
         {
-            IEnumerable<Greetings> grettingsDatabase = _db.Greetings;
-            TempData["count"] = grettingsDatabase.Count();
+            
+            TempData["count"] = crud.CountData();
             return View();
         }
 
         public IActionResult Greeted()
         {
-            IEnumerable<Greetings> grettingsDatabase = _db.Greetings;
+            var grettingsDatabase = crud.GreetedNames();
             return View(grettingsDatabase);
         }
 
         public IActionResult Delete(int? id)
         {
-            CrudConstructor();
+            
             crud.DeleteName(id);
             return RedirectToAction("Greeted");
         }
 
         public IActionResult GreetedName(int? id)
         {
-            var obj = _db.Greetings.Find(id);
+            var obj = crud.FindUserById(id);
             if (id == null || id == 0 || obj == null)
             {
                 return RedirectToAction("Index", "NotFound");
@@ -63,9 +57,7 @@ namespace Greetings_CSharp.Controllers
 
         public IActionResult Reset()
         {
-            CrudConstructor();
-            IEnumerable<Greetings> grettingsDatabase = _db.Greetings;
-            if(grettingsDatabase.Count() > 0){
+            if(crud.CountData() > 0){
                 crud.ResetDB();
                 TempData["errorMessage"] = "Names deleted 🤯";
             }else {
@@ -81,14 +73,13 @@ namespace Greetings_CSharp.Controllers
         public IActionResult GreetMe(Greetings bindedData, string language)
         {
             var message = new GreetMessage();
-            CrudConstructor();
+            
             var regexTrue = Regex.IsMatch(bindedData.Name, @"^[a-zA-Z]+$");
             bindedData.Name = crud.CapitalizeFirstLetterAndLowerRest(bindedData.Name);
             if(!String.IsNullOrEmpty(bindedData.Name) && !String.IsNullOrEmpty(language) && regexTrue){
-                crud.CreteAndUpdate(bindedData, language);
-                TempData["message"] = message.Message(bindedData, language);
+                TempData["message"] = crud.CreateAndUpdate(bindedData, language);;
             } else{
-                TempData["errorMessage"] = message.ErrorMessage(bindedData, language);
+                TempData["errorMessage"] = message.Message(bindedData, language);
             }
             return RedirectToAction("Index");
         }
