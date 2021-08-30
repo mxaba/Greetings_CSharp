@@ -18,7 +18,7 @@
 <div class="row">
     <div class="col-12">
         <form asp-action="GreetMe" method="post">
-            <input type="text" asp-for="Name" placeholder="Enter your name">
+            <input type="text" asp-for="Name" placeholder="Enter your name" required>
             <span class="countGretings">@TempData["count"]</span>
 
             <div class="row">

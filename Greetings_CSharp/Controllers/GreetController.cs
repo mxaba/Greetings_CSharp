@@ -13,36 +13,36 @@ namespace Greetings_CSharp.Controllers
 {
     public class GreetController : Controller
     {
-        private ICreateReadUpdateDelete crud;
+        private ICreateReadUpdateDelete createReadUpdateDelete;
         
         public GreetController([FromServices] ICreateReadUpdateDelete createReadUpdateDelete){
-            crud = createReadUpdateDelete; 
+            this.createReadUpdateDelete = createReadUpdateDelete; 
         }
 
         // GET: /<controller>/
         public IActionResult Index()
         {
             
-            TempData["count"] = crud.CountData();
+            TempData["count"] = createReadUpdateDelete.CountData();
             return View();
         }
 
         public IActionResult Greeted()
         {
-            var grettingsDatabase = crud.GreetedNames();
+            var grettingsDatabase = createReadUpdateDelete.GreetedNames();
             return View(grettingsDatabase);
         }
 
         public IActionResult Delete(int? id)
         {
             
-            crud.DeleteName(id);
+            createReadUpdateDelete.DeleteName(id);
             return RedirectToAction("Greeted");
         }
 
         public IActionResult GreetedName(int? id)
         {
-            var obj = crud.FindUserById(id);
+            var obj = createReadUpdateDelete.FindUserById(id);
             if (id == null || id == 0 || obj == null)
             {
                 return RedirectToAction("Index", "NotFound");
@@ -57,8 +57,8 @@ namespace Greetings_CSharp.Controllers
 
         public IActionResult Reset()
         {
-            if(crud.CountData() > 0){
-                crud.ResetDB();
+            if(createReadUpdateDelete.CountData() > 0){
+                createReadUpdateDelete.ResetDB();
                 TempData["errorMessage"] = "Names deleted 🤯";
             }else {
                 TempData["errorMessage"] = "Nothing to be deleted 😅";
@@ -75,9 +75,9 @@ namespace Greetings_CSharp.Controllers
             var message = new GreetMessage();
             
             var regexTrue = Regex.IsMatch(bindedData.Name, @"^[a-zA-Z]+$");
-            bindedData.Name = crud.CapitalizeFirstLetterAndLowerRest(bindedData.Name);
+            bindedData.Name = createReadUpdateDelete.CapitalizeFirstLetterAndLowerRest(bindedData.Name);
             if(!String.IsNullOrEmpty(bindedData.Name) && !String.IsNullOrEmpty(language) && regexTrue){
-                TempData["message"] = crud.CreateAndUpdate(bindedData, language);;
+                TempData["message"] = createReadUpdateDelete.CreateAndUpdate(bindedData, language);;
             } else{
                 TempData["errorMessage"] = message.Message(bindedData, language);
             }

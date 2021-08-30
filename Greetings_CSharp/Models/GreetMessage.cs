@@ -7,7 +7,7 @@ namespace Greetings_CSharp.Models
     {
         private string _message;
         public string Message(Greetings objList, string language)
-        {
+        { 
             if(!ErrorMessage(objList, language)){
                 if (language == "english") {
                     _message = $"Hello, {objList.Name}";
