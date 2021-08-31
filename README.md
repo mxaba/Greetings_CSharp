@@ -1,6 +1,10 @@
 # Greeting MVC CSharp
 The application in Action [Greeting MVC CSharp](https://grettingappcsharp.herokuapp.com/)
 
+## Travis Badge
+- 
+    > [![Build Status](https://app.travis-ci.com/mxaba/Greetings_CSharp.svg?branch=master)](https://app.travis-ci.com/mxaba/Greetings_CSharp)
+
 ## (PostgreSQL) Database Setup
 -   
     ### Packages to be installed
