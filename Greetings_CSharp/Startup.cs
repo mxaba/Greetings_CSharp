@@ -32,7 +32,7 @@ namespace Greetings_CSharp
             services.AddControllersWithViews();
 
             var IsDevelopment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
-            var connectionString = IsDevelopment ? Configuration.GetConnectionString("DefaultConnectionServer") : GetHerokuConnectionString();
+            var connectionString = IsDevelopment ? Configuration.GetConnectionString("DefaultConnection") : GetHerokuConnectionString();
             services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
 
             // Add application services.
