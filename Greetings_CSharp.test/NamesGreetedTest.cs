@@ -50,9 +50,8 @@ namespace Greetings_CSharp.test
             Assert.Equal("Sawubona, Miguel", createReadUpdateDelete.CreateAndUpdate(greetBind2, "isizulu"));
             Assert.Equal("Sawubona, Andre", createReadUpdateDelete.CreateAndUpdate(greetBind3, "isizulu"));
 
-            // var obj1Str = JsonConvert.SerializeObject("");
-            // var obj2Str = JsonConvert.SerializeObject("");
-            // Assert.Equal(obj1Str, obj2Str );
+            var obj1Str = JsonConvert.SerializeObject(AllData);
+            var obj2Str = JsonConvert.SerializeObject(createReadUpdateDelete.GreetedNames());
             
             Assert.Equal(4, createReadUpdateDelete.CountData());
             createReadUpdateDelete.ResetDB();

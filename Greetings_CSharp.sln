@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greetings_CSharp", "Greetin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greetings_CSharp.test", "Greetings_CSharp.test\Greetings_CSharp.test.csproj", "{8981121F-E56C-4A82-83F0-FA09EA8BD1F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseFeatures", "DatabaseFeatures\DatabaseFeatures.csproj", "{719360FC-2347-464C-80AB-5B7ACE1FEBB1}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{8981121F-E56C-4A82-83F0-FA09EA8BD1F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8981121F-E56C-4A82-83F0-FA09EA8BD1F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8981121F-E56C-4A82-83F0-FA09EA8BD1F7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{719360FC-2347-464C-80AB-5B7ACE1FEBB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{719360FC-2347-464C-80AB-5B7ACE1FEBB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{719360FC-2347-464C-80AB-5B7ACE1FEBB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{719360FC-2347-464C-80AB-5B7ACE1FEBB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
