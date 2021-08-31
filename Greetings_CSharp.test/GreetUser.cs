@@ -1,44 +1,85 @@
 using System.Collections.Generic;
-using Greetings_CSharp.Database;
 using Greetings_CSharp.Models;
 using Xunit;
 using System;
+using Microsoft.AspNetCore.Mvc;
+using Greetings_CSharp.Database;
 
 namespace Greetings_CSharp.test
 {
     [Collection("Database")]
     public class GreetUser
     {
-        private ApplicationDbContext testDbContext;
         private ICreateReadUpdateDelete createReadUpdateDelete;
-        private GreetMessage message;
 
-        public GreetUser(DatabaseFixture databaseFixture)
+        public GreetUser([FromServices] ICreateReadUpdateDelete createReadUpdateDelete)
         {
-            testDbContext = databaseFixture.DbContext;
-            message = new GreetMessage();
+            this.createReadUpdateDelete = createReadUpdateDelete;
         }
 
         [Fact]
-        public void GreetMceboInAllLanguage()
+        public void GreetMceboInIsizulu()
         {
+            createReadUpdateDelete.ResetDB();
             var greetBind = new Greetings { Name="Mcebo", English=0, Spanish=0,  Isizulu=0, Counts=0};
-            var grettingsDatabase = testDbContext.Greetings;
-            Assert.Equal("Sawubona, Mcebo", message.Message(greetBind, "isizulu"));
-            Assert.Equal("Hello, Mcebo", message.Message(greetBind, "english"));
-            Assert.Equal("Hola, Mcebo", message.Message(greetBind, "spanish"));
-            // Assert.Equal(1, createReadUpdateDelete.CountData());
+            Assert.Equal("Sawubona, Mcebo", createReadUpdateDelete.CreateAndUpdate(greetBind, "isizulu"));
+            createReadUpdateDelete.ResetDB();
+        }
+
+        [Fact]
+        public void GreetMceboInEnglish()
+        {
+            createReadUpdateDelete.ResetDB();
+            var greetBind = new Greetings { Name="Mcebo", English=0, Spanish=0,  Isizulu=0, Counts=0};
+            Assert.Equal("Hello, Mcebo", createReadUpdateDelete.CreateAndUpdate(greetBind, "english"));
+            createReadUpdateDelete.ResetDB();
+        }
+
+        [Fact]
+        public void GreetMceboInSpanish()
+        {
+            createReadUpdateDelete.ResetDB();
+            var greetBind = new Greetings { Name="Mcebo", English=0, Spanish=0,  Isizulu=0, Counts=0};
+            Assert.Equal("Hola, Mcebo", createReadUpdateDelete.CreateAndUpdate(greetBind, "spanish"));
+            createReadUpdateDelete.ResetDB();
         }
 
         [Fact]
         public void GreetAndreInAllLanguage()
         {
+            createReadUpdateDelete.ResetDB();
             var greetBind = new Greetings { Name="Andre", English=0, Spanish=0,  Isizulu=0, Counts=0};
-            var grettingsDatabase = testDbContext.Greetings;
-            Assert.Equal("Sawubona, Andre", message.Message(greetBind, "isizulu"));
-            Assert.Equal("Hello, Andre", message.Message(greetBind, "english"));
-            Assert.Equal("Hola, Andre", message.Message(greetBind, "spanish"));
-            // Assert.Equal();
+            Assert.Equal("Sawubona, Andre", createReadUpdateDelete.CreateAndUpdate(greetBind, "isizulu"));
+            Assert.Equal("Hello, Andre", createReadUpdateDelete.CreateAndUpdate(greetBind, "english"));
+            Assert.Equal("Hola, Andre", createReadUpdateDelete.CreateAndUpdate(greetBind, "spanish"));
+            createReadUpdateDelete.ResetDB();
+        }
+
+        [Fact]
+        public void GreetJosiahInIsizulu()
+        {
+            createReadUpdateDelete.ResetDB();
+            var greetBind = new Greetings { Name="Josiah", English=0, Spanish=0,  Isizulu=0, Counts=0};
+            Assert.Equal("Sawubona, Josiah", createReadUpdateDelete.CreateAndUpdate(greetBind, "isizulu"));
+            createReadUpdateDelete.ResetDB();
+        }
+
+        [Fact]
+        public void GreetCingaInEnglish()
+        {
+            createReadUpdateDelete.ResetDB();
+            var greetBind = new Greetings { Name="Cinga", English=0, Spanish=0,  Isizulu=0, Counts=0};
+            Assert.Equal("Hello, Cinga", createReadUpdateDelete.CreateAndUpdate(greetBind, "english"));
+            createReadUpdateDelete.ResetDB();
+        }
+
+        [Fact]
+        public void GreetspanishInSpanish()
+        {
+            createReadUpdateDelete.ResetDB();
+            var greetBind = new Greetings { Name="Andre", English=0, Spanish=0,  Isizulu=0, Counts=0};
+            Assert.Equal("Hola, Andre", createReadUpdateDelete.CreateAndUpdate(greetBind, "spanish"));
+            createReadUpdateDelete.ResetDB();
         }
     }
 }

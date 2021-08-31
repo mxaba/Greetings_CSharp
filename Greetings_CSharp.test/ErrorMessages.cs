@@ -1,40 +1,45 @@
-using Greetings_CSharp.Database;
+using System.Collections.Generic;
 using Greetings_CSharp.Models;
 using Xunit;
+using System;
+using Microsoft.AspNetCore.Mvc;
+using Greetings_CSharp.Database;
 
 namespace Greetings_CSharp.test
 {
     [Collection("Database")]
     public class ErrorMessages
     {
-        private GreetMessage message;
+        private ICreateReadUpdateDelete createReadUpdateDelete;
 
-        private void CrudConstructor(){
-            message = new GreetMessage();
+        public ErrorMessages([FromServices] ICreateReadUpdateDelete createReadUpdateDelete)
+        {
+            this.createReadUpdateDelete = createReadUpdateDelete;
         }
 
         [Fact]
-        public void LanguageNotSelected()
+        public void NoLanguageSelected()
         {
-            CrudConstructor();
-            var greetBind = new Greetings { Name="Mcebo"};
-            Assert.Equal("Please select a language! ❌", message.Message(greetBind, ""));
+            createReadUpdateDelete.ResetDB();
+            var greetBind = new Greetings { Name="Mcebo", English=0, Spanish=0,  Isizulu=0, Counts=0};
+            Assert.Equal("Please select a language! ❌", createReadUpdateDelete.CreateAndUpdate(greetBind, ""));
         }
 
         [Fact]
-        public void NameSelectedButWithNumbers()
+        public void NoNamePassed()
         {
-            CrudConstructor();
-            var greetBind = new Greetings { Name="Mcebo12" };
-            Assert.Equal("Please enter a valid name with only Letters! ❌", message.Message(greetBind, "english"));
+            createReadUpdateDelete.ResetDB();
+            var greetBind = new Greetings { Name="", English=0, Spanish=0,  Isizulu=0, Counts=0};
+            Assert.Equal("Please enter a valid name with only Letters! ❌", createReadUpdateDelete.CreateAndUpdate(greetBind, "english"));
         }
 
         [Fact]
-        public void NameAndLanguageNotSelected()
+        public void PassingAnInvalidName()
         {
-            CrudConstructor();
-            var greetBind = new Greetings { Name="" };
-            Assert.Equal("Please enter a name and select a language ❌", message.Message(greetBind, ""));
+            createReadUpdateDelete.ResetDB();
+            var greetBind = new Greetings { Name="Mcebo09@#$%ˆ&*!±", English=0, Spanish=0,  Isizulu=0, Counts=0};
+            Assert.Equal("Please enter a valid name with only Letters! ❌", createReadUpdateDelete.CreateAndUpdate(greetBind, "spanish"));
+            createReadUpdateDelete.ResetDB();
         }
     }
 }
