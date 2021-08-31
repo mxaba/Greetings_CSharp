@@ -5,6 +5,10 @@ The application in Action [Greeting MVC CSharp](https://grettingappcsharp.heroku
 - 
     > [![Build Status](https://app.travis-ci.com/mxaba/Greetings_CSharp.svg?branch=master)](https://app.travis-ci.com/mxaba/Greetings_CSharp)
 
+## GitHub Badge
+-  
+    > [![.NET](https://github.com/mxaba/Greetings_CSharp/actions/workflows/dotnet.yml/badge.svg)](https://github.com/mxaba/Greetings_CSharp/actions/workflows/dotnet.yml)
+
 ## (PostgreSQL) Database Setup
 -   
     ### Packages to be installed
