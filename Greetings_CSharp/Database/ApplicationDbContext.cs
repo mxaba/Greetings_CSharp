@@ -10,8 +10,6 @@ namespace Greetings_CSharp.Database
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-            // modelBuilder.UsePostgresConventions();
         }
 
         public DbSet<Greetings> Greetings { get; set; }
