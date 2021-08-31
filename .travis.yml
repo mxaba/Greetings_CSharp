@@ -1,0 +1,22 @@
+language: csharp
+
+sudo: required  
+
+mono: none
+
+dotnet: 5.0.205
+
+services:
+  - postgresql
+
+before_script:
+  - psql -c 'create database  greetings;' -U postgres
+  - psql -c "CREATE USER 'postgresgreet' WITH PASSWORD 'postgres';" -U postgres
+
+script:
+  dotnet test
+
+addons:
+    apt:
+    packages:
+    - postgresql-server-dev-9.2
