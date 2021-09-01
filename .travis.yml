@@ -1,12 +1,26 @@
 language: csharp
 
+env:
+  - DATABASE_URL=postgresql://mxaba:MyPasswordMCB@localhost:5432/greetings
+
 sudo: required  
 
 mono: none
 
 dotnet: 5.0.205
 
-dist: xenial
+services:
+  - postgresql
+
+before_script:
+  - psql -c 'create database  greetings;' -U postgres
+  - psql -c "CREATE USER mxaba WITH PASSWORD 'MyPasswordMCB';" -U postgres
+  - psql -U postgres -d greetings -a -f table.sql
 
 script:
   dotnet test
+
+addons:
+    apt:
+    packages:
+    - postgresql-server-dev-9.2
