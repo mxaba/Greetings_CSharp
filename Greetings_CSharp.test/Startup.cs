@@ -13,7 +13,7 @@ namespace Greetings_CSharp.test
         {
             services.AddSingleton<ICreateReadUpdateDelete, CreateReadUpdateDelete>();
 
-            services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql("Server=localhost;Database=greetings;Port=5432;User Id=mxaba;Password=MyPasswordMCB;"));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql("Server=localhost;Database=greetings;Port=5432;User Id=mxaba;Password=MyPasswordMCB;Timeout=300;CommandTimeout=300"));
         }
     }
 }
